@@ -28,9 +28,6 @@
               "projects/flight-app/src/manifest.json"
             ],
             "styles": [
-              {
-                "input": "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
-              },
               "projects/flight-app/src/styles.scss",
               {
                 "input": "./node_modules/bootstrap/dist/css/bootstrap.css"
@@ -88,9 +85,6 @@
             "tsConfig": "projects/flight-app/tsconfig.spec.json",
             "karmaConfig": "projects/flight-app/karma.conf.js",
             "styles": [
-              {
-                "input": "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
-              },
               "projects/flight-app/src/styles.scss"
             ],
             "scripts": [],

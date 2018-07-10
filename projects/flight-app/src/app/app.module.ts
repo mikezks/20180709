@@ -6,7 +6,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { NavComponent } from './nav/nav.component';
 import { HomeComponent } from './home/home.component';
-import { FlightSearchComponent } from './FlightSearch/FlightSearch.component';
+import { FlightSearchComponent } from './flight-search/flight-search.component';
 
 @NgModule({
   imports: [
@@ -21,11 +21,7 @@ import { FlightSearchComponent } from './FlightSearch/FlightSearch.component';
     HomeComponent,
     FlightSearchComponent
   ],
-  providers: [
-
-  ],
-  bootstrap: [
-    AppComponent
-  ]
+  providers: [],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
