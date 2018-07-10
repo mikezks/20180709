@@ -6,22 +6,24 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { NavComponent } from './nav/nav.component';
 import { HomeComponent } from './home/home.component';
-import { FlightSearchComponent } from './flight-search/flight-search.component';
+import { FlightBookingModule } from './flight-booking/flight-booking.module';
 
 @NgModule({
   imports: [
     BrowserModule,
     SharedModule,
     NgbModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    FlightBookingModule
   ],
   declarations: [
     AppComponent,
     NavComponent,
-    HomeComponent,
-    FlightSearchComponent
+    HomeComponent
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }

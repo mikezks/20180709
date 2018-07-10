@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Flight } from '../entities/flights';
+import { Flight } from '../../entities/flights';
 import { HttpClient } from '@angular/common/http';
 import { FlightService } from './flight.service';
 import { DummyFlightService } from './dummy-flight.service';

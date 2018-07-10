@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Flight } from '../entities/flights';
+import { Flight } from '../../entities/flights';
 import { AbstractFlightService } from './abstract-flight.service';
 
 @Component({
