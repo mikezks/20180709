@@ -6,7 +6,7 @@ import { Flight } from '../entities/flights';
 @Injectable({
   providedIn: 'root'
 })
-export class FlightServiceService {
+export class FlightService {
 
   constructor(private http: HttpClient) { }
 

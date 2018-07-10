@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Flight } from '../entities/flights';
-import { HttpHeaders, HttpParams, HttpClient } from '@angular/common/http';
+import { AbstractFlightService } from './abstract-flight.service';
 
 @Component({
   selector: 'app-flight-search',
@@ -15,23 +15,14 @@ export class FlightSearchComponent implements OnInit {
   message: string;
   displayedColumns: string[] = ['id', 'from', 'to', 'date', 'select'];
 
-  constructor(private http: HttpClient) { }
+  constructor(private flightService: AbstractFlightService) { }
 
   ngOnInit() {
   }
 
   search(): void {
-    const url = 'http://www.angular.at/api/flight';
-
-    const headers = new HttpHeaders()
-      .set('Accept', 'application/json');
-
-    const params = new HttpParams()
-      .set('from', this.from)
-      .set('to', this.to);
-
-    this.http
-      .get<Flight[]>(url, { headers, params })
+    this.flightService
+      .find(this.from, this.to)
       .subscribe(
         (flights: Flight[]) => {
           this.flights = flights;
@@ -43,22 +34,16 @@ export class FlightSearchComponent implements OnInit {
   }
 
   save(): void {
-
-    const url = 'http://www.angular.at/api/flight';
-
-    const headers = new HttpHeaders()
-      .set('Accept', 'application/json');
-
-    this.http
-      .post<Flight>(url, this.selectedFlight, { headers })
+    this.flightService
+      .save(this.selectedFlight)
       .subscribe(
         flight => {
           this.selectedFlight = flight;
-          this.message = "Erfolgreich gespeichert!";
+          this.message = 'Erfolgreich gespeichert!';
         },
         errResponse => {
           console.error('Fehler beim Speichern', errResponse);
-          this.message = "Fehler beim Speichern: ";
+          this.message = 'Fehler beim Speichern: ' + errResponse;
         }
       );
   }
