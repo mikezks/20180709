@@ -15,6 +15,12 @@ export class FlightSearchComponent implements OnInit {
   message: string;
   displayedColumns: string[] = ['id', 'from', 'to', 'date', 'select'];
 
+  basket: object = {
+    '3': true,
+    '5': true
+  };
+
+
   constructor(private flightService: AbstractFlightService) { }
 
   ngOnInit() {

@@ -14,7 +14,7 @@
  
  
  /* Integration of component themes */
- @import 'projects/flight-app/src/app/flight-search/flight-search.theming';
+ @import 'projects/flight-app/src/app/flight-booking/flight-search/flight-search.theming';
  
  @mixin flight-theme($theme) {
      @include flight-search-theme($theme);

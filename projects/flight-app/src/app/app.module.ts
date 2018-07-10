@@ -7,11 +7,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { NavComponent } from './nav/nav.component';
 import { HomeComponent } from './home/home.component';
 import { FlightBookingModule } from './flight-booking/flight-booking.module';
+import { RouterModule } from '@angular/router';
+import { APP_ROUTES } from './app.routing';
 
 @NgModule({
   imports: [
     BrowserModule,
     SharedModule,
+    RouterModule.forRoot(APP_ROUTES),
     NgbModule.forRoot(),
     HttpClientModule,
     FlightBookingModule
