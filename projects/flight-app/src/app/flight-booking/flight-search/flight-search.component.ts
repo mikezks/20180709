@@ -14,6 +14,7 @@ export class FlightSearchComponent implements OnInit {
   selectedFlight: Flight;
   message: string;
   displayedColumns: string[] = ['id', 'from', 'to', 'date', 'select'];
+  numberFlights: number;
 
   basket: object = {
     '3': true,

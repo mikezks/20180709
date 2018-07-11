@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   MatButtonModule,
   MatSidenavModule,
@@ -20,6 +20,7 @@ import { LayoutModule } from '@angular/cdk/layout';
     CommonModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     LayoutModule,
     MatButtonModule,
     MatCardModule,
@@ -35,6 +36,7 @@ import { LayoutModule } from '@angular/cdk/layout';
   exports: [
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     LayoutModule,
     MatButtonModule,
     MatCardModule,
