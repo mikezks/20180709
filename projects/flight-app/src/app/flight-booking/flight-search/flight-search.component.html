@@ -24,7 +24,7 @@
         class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
         <app-flight-card
             [item]="f"
-            (itemChange)="edit($event)"
+            (itemChange)="edit(f)"
             [selected]="basket[f.id]"
             (selectedChange)="selectedChange(f, $event)">
         </app-flight-card>
@@ -61,13 +61,13 @@
         placeholder="to">
     </mat-form-field>
 
-    <mat-form-field>
-      <input
-        [(ngModel)]="selectedFlight.date"
-        name="date"
-        matInput
-        placeholder="date">
-    </mat-form-field>
+      <mat-form-field>
+        <input
+          [ngModel]="selectedFlight.date"
+          name="date"
+          matInput
+          placeholder="date">
+      </mat-form-field>
 
   </mat-card-content>
   <mat-card-actions>

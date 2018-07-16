@@ -9,6 +9,12 @@ import { HomeComponent } from './home/home.component';
 import { FlightBookingModule } from './flight-booking/flight-booking.module';
 import { RouterModule } from '@angular/router';
 import { APP_ROUTES } from './app.routing';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './+state';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
+import { AppEffects } from './+state/effects/app.effects';
 
 @NgModule({
   imports: [
@@ -17,7 +23,10 @@ import { APP_ROUTES } from './app.routing';
     RouterModule.forRoot(APP_ROUTES),
     NgbModule.forRoot(),
     HttpClientModule,
-    FlightBookingModule
+    FlightBookingModule,
+    StoreModule.forRoot(reducers, { metaReducers }),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    EffectsModule.forRoot([ AppEffects ])
   ],
   declarations: [
     AppComponent,
