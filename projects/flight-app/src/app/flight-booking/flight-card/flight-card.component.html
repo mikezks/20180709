@@ -20,7 +20,8 @@
             <mat-icon>remove</mat-icon>
         </button>
         <!-- [routerLink]="['/flight-edit', item.id, {showDetails: false}]" -->
-        <a            
+        <a
+            (click)="edit()"
             mat-mini-fab>
             <mat-icon>edit</mat-icon>
         </a>

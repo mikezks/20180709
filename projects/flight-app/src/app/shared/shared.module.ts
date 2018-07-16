@@ -11,7 +11,8 @@ import {
   MatIconModule,
   MatListModule,
   MatSnackBarModule,
-  MatTableModule
+  MatTableModule,
+  MatBadgeModule
 } from '@angular/material';
 import { LayoutModule } from '@angular/cdk/layout';
 
@@ -22,6 +23,7 @@ import { LayoutModule } from '@angular/cdk/layout';
     FormsModule,
     ReactiveFormsModule,
     LayoutModule,
+    MatBadgeModule,
     MatButtonModule,
     MatCardModule,
     MatIconModule,
@@ -38,6 +40,7 @@ import { LayoutModule } from '@angular/cdk/layout';
     FormsModule,
     ReactiveFormsModule,
     LayoutModule,
+    MatBadgeModule,
     MatButtonModule,
     MatCardModule,
     MatIconModule,

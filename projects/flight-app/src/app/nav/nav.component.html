@@ -25,7 +25,7 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>Flights42</span>
-
+      <mat-icon [matBadge]="flightCount$ | async" matBadgeColor="accent">flight</mat-icon>
     </mat-toolbar>
     <div class="container-fluid">
 

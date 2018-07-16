@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Flight } from '../../entities/flights';
 import { AbstractFlightService } from './abstract-flight.service';
+import { EventService } from '../../event.service';
 
 @Component({
   selector: 'app-flight-search',
@@ -16,13 +17,11 @@ export class FlightSearchComponent implements OnInit {
   displayedColumns: string[] = ['id', 'from', 'to', 'date', 'select'];
   numberFlights: number;
 
-  basket: object = {
-    '3': true,
-    '5': true
-  };
+  basket: { [key: string]: boolean } = {};
 
-
-  constructor(private flightService: AbstractFlightService) { }
+  constructor(
+    private flightService: AbstractFlightService,
+    private eventService: EventService) { }
 
   ngOnInit() {
   }
@@ -55,9 +54,18 @@ export class FlightSearchComponent implements OnInit {
       );
   }
 
-  select(f: Flight): void {
+  edit(f: Flight): void {
     this.selectedFlight = f;
     delete this.message;
   }
 
+  selectedChange(f: Flight, selected: boolean): void {
+    this.basket[f.id] = selected;
+    const flightCount = Object.keys(this.basket)
+          .map((key, index) => this.basket[key])
+          .filter(value => value)
+          .length;
+
+    this.eventService.setSelectedFlightCount(flightCount);
+  }
 }
