@@ -1,83 +1,87 @@
-<mat-card>
-  <mat-card-title>Search for Flights</mat-card-title>
-  <mat-card-content>
+<ng-container *ngIf="flights$ | async as flights">
 
-    <mat-form-field>
-      <input [(ngModel)]="from" name="from" matInput placeholder="from">
-    </mat-form-field>
+  <mat-card>
+    <mat-card-title>Search for Flights</mat-card-title>
+    <mat-card-content>
 
-    <mat-form-field>
-      <input [(ngModel)]="to" name="to" matInput placeholder="to">
-    </mat-form-field>
+      <mat-form-field>
+        <input [(ngModel)]="from" name="from" matInput placeholder="from">
+      </mat-form-field>
 
-  </mat-card-content>
-  <mat-card-actions>
+      <mat-form-field>
+        <input [(ngModel)]="to" name="to" matInput placeholder="to">
+      </mat-form-field>
 
-    <button (click)="search()" mat-raised-button color="primary">Search</button>
+    </mat-card-content>
+    <mat-card-actions>
 
-  </mat-card-actions>
-</mat-card>
+      <button (click)="search()" mat-raised-button color="primary">Search</button>
 
-<mat-card *ngIf="flights.length > 0">
-  <div class="row">
-      <div *ngFor="let f of flights" 
-        class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-        <app-flight-card
-            [item]="f"
-            (itemChange)="edit(f)"
-            [selected]="basket[f.id]"
-            (selectedChange)="selectedChange(f, $event)">
-        </app-flight-card>
-      </div>
-  </div>
-</mat-card>
+    </mat-card-actions>
+  </mat-card>
 
-<mat-card>
-  <mat-card-title>Basket</mat-card-title>
-  <mat-card-content>
-      <pre>{{ basket | json }}</pre>
-      {{ numberFlights }}
-  </mat-card-content>
-</mat-card>
+  <mat-card *ngIf="flights.length > 0">
+    <div class="row">
+        <div *ngFor="let f of flights" 
+          class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+          <app-flight-card
+              [item]="f"
+              (itemChange)="edit($event)"
+              [selected]="basket[f.id]"
+              (selectedChange)="selectedChange(f, $event)">
+          </app-flight-card>
+        </div>
+    </div>
+  </mat-card>
 
-<mat-card *ngIf="selectedFlight">
-  <mat-card-title>Edit Flight</mat-card-title>
-  <mat-card-subtitle>{{message}}</mat-card-subtitle>
-  <mat-card-content>
-    
-    <mat-form-field>
-      <input
-        [(ngModel)]="selectedFlight.from"
-        name="from"
-        matInput
-        placeholder="from">
-    </mat-form-field>
+  <mat-card>
+    <mat-card-title>Basket</mat-card-title>
+    <mat-card-content>
+        <pre>{{ basket | json }}</pre>
+        {{ numberFlights }}
+    </mat-card-content>
+  </mat-card>
 
-    <mat-form-field>
-      <input
-        [(ngModel)]="selectedFlight.to"
-        name="to"
-        matInput
-        placeholder="to">
-    </mat-form-field>
+  <mat-card *ngIf="selectedFlight">
+    <mat-card-title>Edit Flight</mat-card-title>
+    <mat-card-subtitle>{{message}}</mat-card-subtitle>
+    <mat-card-content>
+      
+      <mat-form-field>
+        <input
+          [(ngModel)]="selectedFlight.from"
+          name="from"
+          matInput
+          placeholder="from">
+      </mat-form-field>
 
       <mat-form-field>
         <input
-          [ngModel]="selectedFlight.date"
+          [(ngModel)]="selectedFlight.to"
+          name="to"
+          matInput
+          placeholder="to">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          [(ngModel)]="selectedFlight.date"
           name="date"
           matInput
           placeholder="date">
       </mat-form-field>
 
-  </mat-card-content>
-  <mat-card-actions>
+    </mat-card-content>
+    <mat-card-actions>
 
-    <button
-      (click)="save()"
-      mat-raised-button
-      color="primary">
-      Save
-    </button>
+      <button
+        (click)="save()"
+        mat-raised-button
+        color="primary">
+        Save
+      </button>
 
-  </mat-card-actions>
-</mat-card>
+    </mat-card-actions>
+  </mat-card>
+
+</ng-container>

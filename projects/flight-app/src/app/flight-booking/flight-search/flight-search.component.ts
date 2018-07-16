@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Flight } from '../../entities/flights';
 import { AbstractFlightService } from './abstract-flight.service';
 import { EventService } from '../../event.service';
+import { Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import * as fromFlightBooking from '../+state/reducers/flight-booking.reducer';
+import { FlightsLoadedAction } from '../+state/actions/flight-booking.actions';
 
 @Component({
   selector: 'app-flight-search',
@@ -11,23 +15,26 @@ import { EventService } from '../../event.service';
 export class FlightSearchComponent implements OnInit {
   from = 'Wien';
   to = 'Berlin';
-  flights: Flight[] = [];
+  // flights: Flight[] = [];
   selectedFlight: Flight;
   message: string;
   displayedColumns: string[] = ['id', 'from', 'to', 'date', 'select'];
   numberFlights: number;
+  flights$: Observable<Flight[]>;
 
   basket: { [key: string]: boolean } = {};
 
   constructor(
     private flightService: AbstractFlightService,
-    private eventService: EventService) { }
+    private eventService: EventService,
+    private store: Store<fromFlightBooking.FeatureState>) {}
 
   ngOnInit() {
+    this.flights$ = this.store.pipe(select(s => s.flightBooking.flights));
   }
 
   search(): void {
-    this.flightService
+/*     this.flightService
       .find(this.from, this.to)
       .subscribe(
         (flights: Flight[]) => {
@@ -35,6 +42,17 @@ export class FlightSearchComponent implements OnInit {
         },
         (errResp) => {
           console.error('Error loading flights', errResp);
+        }
+      ); */
+
+    this.flightService
+      .find(this.from, this.to)
+      .subscribe(
+        flights => {
+          this.store.dispatch(new FlightsLoadedAction(flights));
+        },
+        error => {
+          console.error('error', error);
         }
       );
   }
