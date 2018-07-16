@@ -15,7 +15,19 @@
     </mat-card-content>
     <mat-card-actions>
 
-      <button (click)="search()" mat-raised-button color="primary">Search</button>
+      <button
+        (click)="search()"
+        mat-raised-button
+        color="primary">
+        Search
+      </button>
+      <button
+        *ngIf="flights.length > 0"
+        mat-raised-button
+        color="primary"
+        (click)="delay()">
+        Delay 1st Flight
+      </button>
 
     </mat-card-actions>
   </mat-card>

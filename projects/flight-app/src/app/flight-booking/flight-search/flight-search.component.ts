@@ -5,7 +5,8 @@ import { EventService } from '../../event.service';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import * as fromFlightBooking from '../+state/reducers/flight-booking.reducer';
-import { FlightsLoadedAction } from '../+state/actions/flight-booking.actions';
+import { FlightsLoadedAction, FlightUpdateAction } from '../+state/actions/flight-booking.actions';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-flight-search',
@@ -85,5 +86,22 @@ export class FlightSearchComponent implements OnInit {
           .length;
 
     this.eventService.setSelectedFlightCount(flightCount);
+  }
+
+  delay(): void {
+    this.flights$
+      .pipe(
+        take(1)
+      )
+      .subscribe(flights => {
+          const flight = flights[0];
+
+          const oldDate = new Date(flight.date);
+          const newDate = new Date(oldDate.getTime() + 15 * 60 * 1000);
+          const newFlight = { ...flight, date: newDate.toISOString() };
+
+          this.store.dispatch(new FlightUpdateAction(newFlight));
+        }
+      );
   }
 }
