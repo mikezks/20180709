@@ -1,5 +1,5 @@
 <mat-card
-    [ngStyle]="{ 'background': (selected) ? 'lightsteelblue' : 'white' }">
+    [ngStyle]="{ 'background-color': (selected) ? 'steelblue' : undefined }">
     <mat-card-title>{{item.from}} - {{item.to}}</mat-card-title>
     <mat-card-subtitle>{{ item.delayed ? 'delayed' : 'on schedule' }}</mat-card-subtitle>
     <mat-card-content>
