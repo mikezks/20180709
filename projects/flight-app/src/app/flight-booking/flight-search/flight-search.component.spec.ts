@@ -2,6 +2,7 @@ import { TestBed, async, ComponentFixture, fakeAsync, tick } from '@angular/core
 import { HttpClientModule } from '@angular/common/http';
 import { By } from '@angular/platform-browser';
 import { StoreModule, Store } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 import { of, Observable } from 'rxjs';
 import { SharedModule } from '../../shared/shared.module';
 import * as fromFlightBooking from '../+state';
@@ -182,5 +183,72 @@ describe('flight-search.component', () => {
 
             expect(disabled).toBeTruthy();
           }));
+    });
+
+    describe('Testing the interaction with the store', () => {
+        let comp: FlightSearchComponent;
+        let fixture: ComponentFixture<FlightSearchComponent>;
+        let store: Store<fromFlightBooking.State>;
+
+        const data = [
+            { id: 17, from: 'Graz', to: 'Hamburg', date: '2018-07-09T12:00:00+00:00', delayed: true},
+            { id: 18, from: 'Vienna', to: 'Barcelona', date: '2018-07-09T13:00:00+00:00', delayed: true },
+            { id: 19, from: 'Frankfurt', to: 'Salzburg', date: '2018-07-09T14:00:00+00:00', delayed: true },
+        ];
+
+        const flightServiceMock = {
+            find(from: string, to: string): Observable<Flight[]> {
+                return of(data);
+            },
+            // The definitons below may not be needed in your
+            // training scenario
+            flights: [],
+            load(from: string, to: string): void {
+                this.find(from, to).subscribe(f => { this.flights = f; });
+            }
+        };
+
+        beforeEach(async(() => {
+            TestBed.configureTestingModule({
+                imports: [
+                    StoreModule.forRoot({ 'flightBooking': fromFlightBooking.reducer }),
+                    EffectsModule.forRoot([ fromFlightBooking.FlightBookingEffects ]),
+                    HttpClientModule,
+                    SharedModule
+                ],
+                declarations: [
+                    FlightSearchComponent,
+                    FlightCardComponent
+                ],
+                providers: [
+                    {
+                        provide: AbstractFlightService,
+                        useValue: flightServiceMock
+                    }
+                ]
+            })
+            .compileComponents();
+
+            store = TestBed.get(Store);
+            spyOn(store, 'dispatch').and.callThrough();
+            fixture = TestBed.createComponent(FlightSearchComponent);
+            comp = fixture.componentInstance;
+        }));
+
+        it('should dispatch an action to load flights when search() method is called', () => {
+            const action = new fromFlightBooking.FlightsLoadAction('Wien', 'Berlin');
+            comp.search();
+
+            expect(store.dispatch).toHaveBeenCalledWith(action);
+        });
+
+        it('should get flights after search() method was called', () => {
+            comp.search();
+            fixture.detectChanges();
+
+            comp.flights$.subscribe(result =>
+                expect(result.length).toBe(3)
+            );
+        });
     });
 });
