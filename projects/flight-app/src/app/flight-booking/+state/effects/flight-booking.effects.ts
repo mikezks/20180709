@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
+import { switchMap, map } from 'rxjs/operators';
+import { AbstractFlightService } from '../../services/abstract-flight.service';
 import { FlightBookingActionTypes, FlightsLoadAction, FlightsLoadedAction } from '../actions/flight-booking.actions';
-import { switchMap, map, tap } from 'rxjs/operators';
-import { FlightService } from '../../flight-search/flight.service';
-import { AbstractFlightService } from '../../flight-search/abstract-flight.service';
 
 @Injectable()
 export class FlightBookingEffects {

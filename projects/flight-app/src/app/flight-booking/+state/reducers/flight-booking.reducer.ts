@@ -1,9 +1,5 @@
-import { FlightBookingActions, FlightBookingActionTypes } from '../actions/flight-booking.actions';
 import { Flight } from '../../../entities/flights';
-
-export interface FeatureState {
-  flightBooking: State;
-};
+import { FlightBookingActions, FlightBookingActionTypes } from '../actions/flight-booking.actions';
 
 export interface State {
   flights: Flight[];

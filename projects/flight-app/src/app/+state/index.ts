@@ -9,6 +9,11 @@ import { RouterReducerState, routerReducer } from '@ngrx/router-store';
 import { Params, RouterStateSnapshot } from '@angular/router';
 import { RouterStateSerializer } from '@ngrx/router-store';
 
+export * from './actions/app.actions';
+export * from './reducers/app.reducer';
+export * from './effects/app.effects';
+export * from './selectors/app.selectors';
+
 export interface RootState {
   app: fromApp.State;
   router: RouterReducerState<RouterStateUrl>;

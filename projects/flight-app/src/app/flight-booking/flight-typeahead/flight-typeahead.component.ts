@@ -25,7 +25,7 @@ export class FlightTypeaheadComponent implements OnInit, OnDestroy {
   online$: Observable<boolean>;
   loading: boolean;
   online: boolean;
-  displayedColumns: string[] = ['id', 'from', 'to', 'date'];
+  displayedColumns: string[] = ['id', 'from', 'to', 'date', 'delayed'];
   
   /* RxJS Demo */
   number$: Observable<number>;
@@ -37,7 +37,7 @@ export class FlightTypeaheadComponent implements OnInit, OnDestroy {
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    //this.rxjsDemo();
+    // this.rxjsDemo();
 
     this.online$ = interval(2000).pipe(
       startWith(0),

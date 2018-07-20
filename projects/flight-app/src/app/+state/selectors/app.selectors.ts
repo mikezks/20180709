@@ -1,8 +1,8 @@
 import * as fromApp from '../reducers/app.reducer';
-import { createSelector } from '@ngrx/store';
-import { RootState } from '..';
+import { createSelector, createFeatureSelector } from '@ngrx/store';
+import { State } from '../reducers/app.reducer';
 
-export let getAppState = (s: RootState) => s.app;
+export let getAppState = createFeatureSelector<State>('app');
 
 export const getCount = createSelector(
   getAppState,

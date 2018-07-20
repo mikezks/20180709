@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Flight } from '../../entities/flights';
-import { AbstractFlightService } from './abstract-flight.service';
+import { AbstractFlightService } from '../services/abstract-flight.service';
 import { EventService } from '../../event.service';
-import { Observable } from 'rxjs';
-import { Store, select } from '@ngrx/store';
-import * as fromFlightBooking from '../+state/reducers/flight-booking.reducer';
-import { FlightUpdateAction, FlightsLoadAction } from '../+state/actions/flight-booking.actions';
+import { Observable, empty } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { Store, select, } from '@ngrx/store';
+import * as fromFlightBooking from '../+state';
 
 @Component({
   selector: 'app-flight-search',
@@ -28,10 +27,11 @@ export class FlightSearchComponent implements OnInit {
   constructor(
     private flightService: AbstractFlightService,
     private eventService: EventService,
-    private store: Store<fromFlightBooking.FeatureState>) {}
+    private store: Store<fromFlightBooking.State>) {
+  }
 
   ngOnInit() {
-    this.flights$ = this.store.pipe(select(s => s.flightBooking.flights));
+    this.flights$ = this.store.pipe(select(fromFlightBooking.getFlights));
   }
 
   search(): void {
@@ -57,7 +57,7 @@ export class FlightSearchComponent implements OnInit {
         }
       ); */
 
-    this.store.dispatch(new FlightsLoadAction(this.from, this.to));
+    this.store.dispatch(new fromFlightBooking.FlightsLoadAction(this.from, this.to));
   }
 
   save(): void {
@@ -102,7 +102,7 @@ export class FlightSearchComponent implements OnInit {
           const newDate = new Date(oldDate.getTime() + 15 * 60 * 1000);
           const newFlight = { ...flight, date: newDate.toISOString() };
 
-          this.store.dispatch(new FlightUpdateAction(newFlight));
+          this.store.dispatch(new fromFlightBooking.FlightUpdateAction(newFlight));
         }
       );
   }

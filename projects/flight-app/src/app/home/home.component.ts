@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import * as fromApp from '../+state/reducers/app.reducer';
-import { getCount } from '../+state/selectors/app.selectors';
-import { IncreaseByAction } from '../+state/actions/app.actions';
-import { RootState } from '../+state';
+import * as fromState from '../+state';
 
 @Component({
   selector: 'app-home',
@@ -14,14 +11,14 @@ import { RootState } from '../+state';
 export class HomeComponent implements OnInit {
   count$: Observable<number>;
 
-  constructor(private store: Store<RootState>) {
+  constructor(private store: Store<fromState.State>) {
   }
 
   ngOnInit() {
-    this.count$ = this.store.pipe(select(getCount));
+    this.count$ = this.store.pipe(select(fromState.getCount));
   }
 
   countUp() {
-    this.store.dispatch(new IncreaseByAction(15));
+    this.store.dispatch(new fromState.IncreaseByAction(15));
   }
 }
