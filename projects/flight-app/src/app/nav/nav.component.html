@@ -25,7 +25,23 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>Flights42</span>
-      <mat-icon [matBadge]="flightCount$ | async" matBadgeColor="accent">flight</mat-icon>
+      <mat-nav-list class="top-nav">
+        <a mat-list-item>
+          <mat-icon
+            [matBadge]="flightCount$ | async"
+            matBadgeColor="accent">
+            flight
+          </mat-icon>
+        </a>
+        <a mat-list-item
+          (click)="toggleLang()">
+          <mat-icon
+            [matBadge]="lang === 'de' ? 'en' : 'de'"
+            matBadgeColor="accent">
+            language
+          </mat-icon>
+        </a>
+      </mat-nav-list>
     </mat-toolbar>
     <div class="container-fluid">
 

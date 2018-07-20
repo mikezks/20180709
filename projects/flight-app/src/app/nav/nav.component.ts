@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
 import { EventService } from '../event.service';
 
 @Component({
@@ -10,6 +11,7 @@ import { EventService } from '../event.service';
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent {
+  private lang: string;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -20,8 +22,22 @@ export class NavComponent {
     return this.eventService.selectedFlightCount$;
   }
 
+  get nextLang() {
+    return this.lang === 'de' ? 'en' : 'de';
+  }
+
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private eventService: EventService) {
+    private eventService: EventService,
+    private translate: TranslateService) {
+  }
+
+  setLang(lang: string): void {
+    this.translate.use(lang);
+    this.lang = lang;
+  }
+
+  toggleLang(): void {
+    this.setLang(this.nextLang);
   }
 }

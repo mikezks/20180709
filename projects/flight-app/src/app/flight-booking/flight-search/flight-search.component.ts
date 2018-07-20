@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Store, select, } from '@ngrx/store';
+import { Observable, empty } from 'rxjs';
+import { take } from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
+import * as fromFlightBooking from '../+state';
 import { Flight } from '../../entities/flights';
 import { AbstractFlightService } from '../services/abstract-flight.service';
 import { EventService } from '../../event.service';
-import { Observable, empty } from 'rxjs';
-import { take } from 'rxjs/operators';
-import { Store, select, } from '@ngrx/store';
-import * as fromFlightBooking from '../+state';
 
 @Component({
   selector: 'app-flight-search',
@@ -30,7 +31,8 @@ export class FlightSearchComponent implements OnInit {
   constructor(
     private flightService: AbstractFlightService,
     private eventService: EventService,
-    private store: Store<fromFlightBooking.State>) {
+    private store: Store<fromFlightBooking.State>,
+    private translate: TranslateService) {
   }
 
   ngOnInit() {
@@ -38,6 +40,10 @@ export class FlightSearchComponent implements OnInit {
     this.sumDelayedFlights$ = this.store.pipe(select(fromFlightBooking.getSumDelayedFlights));
     this.totalFlights$ = this.store.pipe(select(fromFlightBooking.getTotalFlights));
     this.delayedRxJSOperator$ = this.store.pipe(fromFlightBooking.getDelayedRxJSOperator());
+
+    this.translate.addLangs(['en', 'de']);
+    this.translate.setDefaultLang('de');
+    this.translate.use('de');
   }
 
   search(): void {

@@ -7,6 +7,11 @@
   box-shadow: 3px 0 6px rgba(0,0,0,.24);
 }
 
-.mat-icon {
-  margin-left: 20px;  
+.top-nav {
+  padding-top: 0;
+
+  .mat-list-item {
+    float: left;
+    user-select: none;
+  }
 }

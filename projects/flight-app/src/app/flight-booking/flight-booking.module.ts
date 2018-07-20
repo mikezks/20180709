@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { TranslateModule } from '@ngx-translate/core';
 import { FLIGHT_BOOKING_ROUTES } from './flight-booking.routing';
 import { SharedModule } from '../shared/shared.module';
 import * as fromFlightBooking from './+state';
@@ -16,7 +17,8 @@ import { FlightTypeaheadComponent } from './flight-typeahead/flight-typeahead.co
     StoreModule.forFeature('flightBooking', fromFlightBooking.reducer),
     EffectsModule.forFeature([fromFlightBooking.FlightBookingEffects]),
     RouterModule.forChild(FLIGHT_BOOKING_ROUTES),
-    SharedModule
+    SharedModule,
+    TranslateModule.forChild()
   ],
   declarations: [
     FlightSearchComponent,
