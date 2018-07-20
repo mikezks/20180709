@@ -66,6 +66,16 @@ export class FlightSearchComponent implements OnInit {
     this.store.dispatch(new fromFlightBooking.FlightsLoadAction(this.from, this.to));
   }
 
+  searchWithService(): void {
+    if (!this.from || !this.to) {
+       return;
+    }
+
+    this.flights$ =
+      this.flightService
+        .find(this.from, this.to);
+  }
+
   save(): void {
     this.flightService
       .save(this.selectedFlight)
