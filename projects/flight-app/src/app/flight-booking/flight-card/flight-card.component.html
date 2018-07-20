@@ -1,6 +1,7 @@
 <mat-card
     [ngStyle]="{ 'background': (selected) ? 'lightsteelblue' : 'white' }">
     <mat-card-title>{{item.from}} - {{item.to}}</mat-card-title>
+    <mat-card-subtitle>{{ item.delayed ? 'delayed' : 'on schedule' }}</mat-card-subtitle>
     <mat-card-content>
         {{item.date | date:'dd.MM.yyyy HH:mm' }}
     </mat-card-content>

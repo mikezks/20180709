@@ -2,6 +2,8 @@
 
   <mat-card>
     <mat-card-title>Search for Flights</mat-card-title>
+    <mat-card-subtitle>Found flights: {{ totalFlights$ | async }}</mat-card-subtitle>
+    <mat-card-subtitle>Delayed flights: {{ sumDelayedFlights$ | async }}</mat-card-subtitle>
     <mat-card-content>
 
       <mat-form-field>
@@ -30,6 +32,13 @@
       </button>
 
     </mat-card-actions>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-title>Delayed flights RxJS Selector Operator</mat-card-title>
+    <mat-card-content>
+      <pre>{{ delayedRxJSOperator$ | async | json }}</pre>
+    </mat-card-content>
   </mat-card>
 
   <mat-card *ngIf="flights.length > 0">

@@ -21,6 +21,9 @@ export class FlightSearchComponent implements OnInit {
   displayedColumns: string[] = ['id', 'from', 'to', 'date', 'select'];
   numberFlights: number;
   flights$: Observable<Flight[]>;
+  sumDelayedFlights$: Observable<number>;
+  totalFlights$: Observable<number>;
+  delayedRxJSOperator$: Observable<Flight[]>;
 
   basket: { [key: string]: boolean } = {};
 
@@ -32,6 +35,9 @@ export class FlightSearchComponent implements OnInit {
 
   ngOnInit() {
     this.flights$ = this.store.pipe(select(fromFlightBooking.getFlights));
+    this.sumDelayedFlights$ = this.store.pipe(select(fromFlightBooking.getSumDelayedFlights));
+    this.totalFlights$ = this.store.pipe(select(fromFlightBooking.getTotalFlights));
+    this.delayedRxJSOperator$ = this.store.pipe(fromFlightBooking.getDelayedRxJSOperator());
   }
 
   search(): void {
@@ -100,7 +106,7 @@ export class FlightSearchComponent implements OnInit {
 
           const oldDate = new Date(flight.date);
           const newDate = new Date(oldDate.getTime() + 15 * 60 * 1000);
-          const newFlight = { ...flight, date: newDate.toISOString() };
+          const newFlight = { ...flight, date: newDate.toISOString(), delayed: true };
 
           this.store.dispatch(new fromFlightBooking.FlightUpdateAction(newFlight));
         }
