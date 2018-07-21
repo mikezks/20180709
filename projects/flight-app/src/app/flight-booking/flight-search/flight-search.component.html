@@ -61,6 +61,22 @@
         <pre>{{ basket | json }}</pre>
         {{ numberFlights }}
     </mat-card-content>
+    <mat-card-actions>
+
+        <button
+          (click)="saveBasket()"
+          mat-raised-button
+          color="primary">
+          Save
+        </button>
+        <button
+          (click)="loadBasket()"
+          mat-raised-button
+          color="primary">
+          Load
+        </button>
+  
+      </mat-card-actions>
   </mat-card>
 
   <mat-card *ngIf="selectedFlight">

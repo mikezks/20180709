@@ -8,6 +8,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { ServiceWorkerModule } from '@angular/service-worker';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { environment } from '../environments/environment';
 import { APP_ROUTES } from './app.routing';
@@ -48,7 +49,8 @@ export function HttpLoaderFactory(http: HttpClient) {
           useFactory: HttpLoaderFactory,
           deps: [HttpClient]
       }
-    })
+    }),
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   declarations: [
     AppComponent,

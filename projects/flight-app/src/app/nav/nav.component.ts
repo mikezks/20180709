@@ -11,7 +11,7 @@ import { EventService } from '../event.service';
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent {
-  private lang: string;
+  lang: string;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(

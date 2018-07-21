@@ -25,6 +25,7 @@
             "assets": [
               "projects/flight-app/src/favicon.ico",
               "projects/flight-app/src/assets",
+              "projects/flight-app/src/manifest.json",
               "projects/flight-app/src/manifest.json"
             ],
             "styles": [
@@ -91,6 +92,7 @@
             "assets": [
               "projects/flight-app/src/favicon.ico",
               "projects/flight-app/src/assets",
+              "projects/flight-app/src/manifest.json",
               "projects/flight-app/src/manifest.json"
             ]
           }

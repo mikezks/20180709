@@ -7,6 +7,7 @@ import * as fromFlightBooking from '../+state';
 import { Flight } from '../../entities/flights';
 import { AbstractFlightService } from '../services/abstract-flight.service';
 import { EventService } from '../../event.service';
+import { LocalBasketService } from '../local-basket.service';
 
 @Component({
   selector: 'app-flight-search',
@@ -32,7 +33,8 @@ export class FlightSearchComponent implements OnInit {
     private flightService: AbstractFlightService,
     private eventService: EventService,
     private store: Store<fromFlightBooking.State>,
-    private translate: TranslateService) {
+    private translate: TranslateService,
+    private localBasketService: LocalBasketService) {
   }
 
   ngOnInit() {
@@ -127,5 +129,23 @@ export class FlightSearchComponent implements OnInit {
           this.store.dispatch(new fromFlightBooking.FlightUpdateAction(newFlight));
         }
       );
+  }
+
+  saveBasket(): void {
+    this.localBasketService
+      .save(this.basket)
+      .then(
+        () => console.debug('successfully saved basket"'),
+        err => console.error('error saving basket', err)
+      );
+  }
+
+  loadBasket(): void {
+    this.localBasketService
+      .load()
+      .then(
+        basket => this.basket = basket,
+        err => console.error('error loading basket', err)
+    );
   }
 }
